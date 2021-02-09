@@ -1,0 +1,39 @@
+<div class="toolbar">
+  <img width="65px" alt="Mobi7 Logo" src="assets\images\mobi7-logo.svg" />
+  <span>Desafio Mobi7</span>
+</div>
+
+<mat-card class="content">
+  <form>
+    <table class="example-full-width">
+      <tr>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="date" name="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Selecione um veículo</mat-label>
+            <mat-select [(value)]="selectedCar">
+              <mat-option *ngFor="let plate of plates" [value]="plate">
+                {{plate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-raised-button color="primary" (click)="search()">Consultar</button>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+</mat-card>
+
+<div class="table" *ngFor="let vehicle of this.vehiclePerPosition">
+  <app-amount-time-table [tracking]=filterTracking(vehicle.plate)></app-amount-time-table>
+</div>
